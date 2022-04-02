@@ -26,7 +26,7 @@ def decrypt(cypher, shift):
 
     
 message = "YOU ARE AWESOME MAN"
-shift = 3
+shift = 4
 cypher = encrypt(message, shift)
 print(cypher)
 print(decrypt(cypher, shift))
