@@ -24,9 +24,16 @@ def decrypt(cypher, shift):
         message_list.append(letter_message)
     return ''.join([str(letter) for letter in message_list])
 
-    
+def break_cypher(cypher):
+    max_shift = len(alphabet_list)
+    shift = 0
+    for nshift in range(shift, max_shift):
+        result = "{0}, SHIFT: {1}".format(decrypt(cypher, nshift), nshift)        
+        print(result)
+
 message = "YOU ARE AWESOME MAN"
 shift = 4
 cypher = encrypt(message, shift)
 print(cypher)
 print(decrypt(cypher, shift))
+break_cypher(cypher)
