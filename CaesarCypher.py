@@ -1,6 +1,6 @@
 import string
 
-# 26 letters alphabet
+# 26 letters from alphabet
 alphabet_list = list(string.ascii_uppercase)
 
 def encrypt(message, shift):
