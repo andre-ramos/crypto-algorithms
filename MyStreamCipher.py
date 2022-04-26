@@ -20,16 +20,29 @@ def transmit(cipher, likely):
     b = []
     for c in cipher:
         if random.randrange(0, likely) == 0:
-            c = c ^ 2**random.randrange(0, 2)
+            c = c ^ 2**random.randrange(0, 8)
         b.append(c)
     return bytes(b)
 
+# Transmitting exercise
+#flip the 6th least significant bit of the 4th byte
+def transmit_(cipher):
+    # insert code here
+    b = []
+    a = 0
+    for c in cipher:
+        if a == 3:
+            c = (c ^ 32)
+        b.append(c)
+        a = a + 1
+    return bytes(b)
+
 key = KeyStream(10)
-message = "Bring supplies to the airport ASAP".encode()
+message = "This is my message".encode()
 cipher = encrypt(key, message)
 print(cipher)
 
-cipher = transmit(cipher, 4)
+cipher = transmit_(cipher)
 
 key = KeyStream(10)
 message = encrypt(key, cipher)
