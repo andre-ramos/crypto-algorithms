@@ -1,0 +1,70 @@
+import math
+import random
+
+from numpy import mat
+
+
+def is_prime(p):
+    for i in range(2, math.isqrt(p)):
+        if p % i == 0:
+            return False
+    return True
+
+def get_prime(size):
+    while True:
+        p = random.randrange(size, 2*size)
+        if is_prime(p):
+            return p
+
+def lcm(a, b):
+    return a*b//math.gcd(a, b)
+
+def get_e(lambda_n):
+    for e in range(2, lambda_n):
+        if math.gcd(e, lambda_n) == 1:
+            return e
+    return False
+
+def get_d(e, lambda_n):
+    for d in range(2, lambda_n):
+        if d*e % lambda_n == 1:
+            return d
+    return False
+
+# 1 - Generating two distinct primes
+size = 300
+p = get_prime(size)
+q = get_prime(size)
+print(p,q)
+
+# 2 - n = p*q
+n = p*q
+print("Modulus n: ", n)
+
+# 3 - Compute lambda formula:
+lambda_n = lcm(p-1, q-1)
+print("Lambda n: ", lambda_n)
+
+
+# 4 - 1 < e <lambda(n) and gcd(e,lambda(n))
+e = get_e(lambda_n)
+print("Public exponent", e)
+
+# 5 - d.e = 1 (mod lambda(n))
+d = get_d(e, lambda_n)
+print("Secret exponent", d)
+
+#Done
+print("Public key(e,n)", e, n)
+print("Secret key(d)", d)
+
+
+# Bob sending msg 
+m = 117
+c = m**e % n
+print("Bob sends", c)
+
+
+#Alice decrypting
+m = c**d % n
+print("Alice message", m)
