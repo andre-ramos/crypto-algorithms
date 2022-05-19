@@ -91,3 +91,15 @@ print("Eve: Secret exponent", d)
 #Eve decrypting
 m = c**d % n
 print("Eve decrypting", m)
+
+
+
+# Bob not being careful
+print("This is Bob not being careful")
+
+message = "Alice is awesome"
+
+for m_c in message:
+    c = ord(m_c)**e % n
+    print(c, " ", end='')
+print()
