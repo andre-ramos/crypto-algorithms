@@ -31,6 +31,11 @@ def get_d(e, lambda_n):
             return d
     return False
 
+def factor(n):
+    for p in range(2, n):
+        if n%p == 0:
+            return p, n//p
+
 # 1 - Generating two distinct primes
 size = 300
 p = get_prime(size)
@@ -60,7 +65,7 @@ print("Secret key(d)", d)
 
 
 # Bob sending msg 
-m = 117
+m = 117 # Real msg
 c = m**e % n
 print("Bob sends", c)
 
@@ -68,3 +73,21 @@ print("Bob sends", c)
 #Alice decrypting
 m = c**d % n
 print("Alice message", m)
+
+#Eve
+
+print("Eve sees Public key (e,n) {}, {} and encrypted cipher c: {}".format(e, n ,c))
+
+
+p, q = factor(n)
+print("Eve: Factors", p, q)
+
+lambda_n = lcm(p-1, q-1)
+print("Eve Lambda n: ", lambda_n)
+
+d = get_d(e, lambda_n)
+print("Eve: Secret exponent", d)
+
+#Eve decrypting
+m = c**d % n
+print("Eve decrypting", m)
